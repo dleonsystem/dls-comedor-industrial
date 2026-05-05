@@ -110,7 +110,7 @@ jobs:
         run: pytest tests/unit/ -v --tb=short --cov=services --cov-report=xml
 
       - name: Subir reporte de cobertura
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           files: coverage.xml
           flags: unit
