@@ -1,0 +1,27 @@
+# CODEOWNERS
+# Define propietarios de código para revisiones automáticas de PRs.
+# Sintaxis: <patrón>  <@usuario o @org/equipo>
+# Más info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# ── Propietario global (fallback para todo el repositorio) ────────
+*                                   @dleonsystem
+
+# ── Módulos Odoo ──────────────────────────────────────────────────
+/services/odoo/                     @dleonsystem
+
+# ── Base de datos y migraciones ───────────────────────────────────
+/services/db/                       @dleonsystem
+
+# ── Infraestructura y Docker ──────────────────────────────────────
+/infra/                             @dleonsystem
+/docker-compose.yml                 @dleonsystem
+
+# ── CI/CD y GitHub workflows ──────────────────────────────────────
+/.github/workflows/                 @dleonsystem
+
+# ── Documentación ─────────────────────────────────────────────────
+/docs/                              @dleonsystem
+
+# ── Configuración de dependencias y herramientas ──────────────────
+/pyproject.toml                     @dleonsystem
+/.pre-commit-config.yaml            @dleonsystem

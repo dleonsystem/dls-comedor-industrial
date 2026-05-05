@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Entradas de menú principal para el módulo comedor -->
+
+    <!-- Menú raíz -->
+    <menuitem
+        id="menu_comedor_root"
+        name="Comedor Industrial"
+        sequence="50"
+        web_icon="comedor,static/description/icon.png"/>
+
+    <!-- Submenú: Operaciones -->
+    <menuitem
+        id="menu_comedor_operaciones"
+        name="Operaciones"
+        parent="menu_comedor_root"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_comedor_menus"
+        name="Menús"
+        parent="menu_comedor_operaciones"
+        action="action_comedor_menu"
+        sequence="10"/>
+
+    <menuitem
+        id="menu_comedor_raciones"
+        name="Raciones"
+        parent="menu_comedor_operaciones"
+        action="action_comedor_racion"
+        sequence="20"/>
+
+</odoo>

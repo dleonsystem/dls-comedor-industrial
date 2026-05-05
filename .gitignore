@@ -27,6 +27,179 @@ share/python-wheels/
 MANIFEST
 
 # PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Sphinx documentation
+docs/_build/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+# .python-version
+
+# pipenv / poetry / pdm / uv lockfiles — include in VCS for apps
+# poetry.lock
+# uv.lock
+
+# pdm
+.pdm-python
+.pdm-build/
+
+# pixi
+.pixi
+
+# PEP 582
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Redis
+*.rdb
+*.aof
+*.pid
+
+# SageMath
+*.sage.py
+
+# ────────────────────────────────────────────────────
+# Environments — NEVER commit real secrets
+# ────────────────────────────────────────────────────
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy / pytype / pyre
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Cython debug
+cython_debug/
+
+# Ruff
+.ruff_cache/
+
+# PyPI
+.pypirc
+
+# ────────────────────────────────────────────────────
+# Odoo
+# ────────────────────────────────────────────────────
+# Odoo filestore (generado en runtime)
+services/odoo/filestore/
+# Logs de Odoo
+services/odoo/*.log
+# Sesiones de Odoo
+services/odoo/sessions/
+
+# ────────────────────────────────────────────────────
+# Docker
+# ────────────────────────────────────────────────────
+# Volúmenes persistentes locales
+infra/docker/volumes/
+# Archivos generados por Compose localmente
+docker-compose.override.yml
+
+# ────────────────────────────────────────────────────
+# PostgreSQL
+# ────────────────────────────────────────────────────
+# Datos locales del cluster de Postgres
+services/db/data/
+*.sql.bak
+
+# ────────────────────────────────────────────────────
+# GCP / Cloud
+# ────────────────────────────────────────────────────
+# Credenciales de GCP — NUNCA en el repo
+*.json.key
+gcp-credentials.json
+service-account*.json
+infra/gcp/terraform.tfstate
+infra/gcp/terraform.tfstate.backup
+infra/gcp/.terraform/
+infra/gcp/*.tfvars
+
+# ────────────────────────────────────────────────────
+# IDEs y editores
+# ────────────────────────────────────────────────────
+.idea/
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ────────────────────────────────────────────────────
+# Artefactos de build y temporales
+# ────────────────────────────────────────────────────
+target/
+*.log
+tmp/
+temp/
+.tmp/
+tempCodeRunnerFile.py
+
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
 #   Usually these files are written by a python script from a template
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest

@@ -1,0 +1,52 @@
+# EditorConfig — https://editorconfig.org
+# Asegura estilos de código consistentes entre editores e IDEs.
+
+root = true
+
+# ── Valores globales ──────────────────────────────────────────────
+[*]
+charset                  = utf-8
+end_of_line              = lf
+indent_style             = space
+indent_size              = 4
+trim_trailing_whitespace = true
+insert_final_newline     = true
+max_line_length          = 120
+
+# ── Python ────────────────────────────────────────────────────────
+[*.py]
+indent_size     = 4
+max_line_length = 88    # alineado con Black / Ruff
+
+# ── YAML (workflows, docker-compose, pre-commit) ──────────────────
+[*.{yml,yaml}]
+indent_size = 2
+
+# ── JSON ──────────────────────────────────────────────────────────
+[*.json]
+indent_size = 2
+
+# ── TOML (pyproject.toml) ─────────────────────────────────────────
+[*.toml]
+indent_size = 4
+
+# ── Markdown ──────────────────────────────────────────────────────
+[*.md]
+trim_trailing_whitespace = false
+max_line_length          = off
+
+# ── Shell scripts ─────────────────────────────────────────────────
+[*.{sh,bash}]
+indent_size = 2
+
+# ── Makefile (requiere tabs) ──────────────────────────────────────
+[Makefile]
+indent_style = tab
+
+# ── Dockerfile ────────────────────────────────────────────────────
+[Dockerfile*]
+indent_size = 4
+
+# ── SQL ───────────────────────────────────────────────────────────
+[*.sql]
+indent_size = 2
