@@ -1,0 +1,9 @@
+# Dependencias Python adicionales para módulos Odoo personalizados
+# Este archivo es instalado por el Dockerfile durante el build de la imagen.
+
+# Utilidades
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Validación y tipado
+pydantic>=2.5.0

@@ -1,0 +1,205 @@
+name: CI — dls-comedor-industrial
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.11"
+  POSTGRES_DB: comedor_test
+  POSTGRES_USER: comedor_user
+  POSTGRES_PASSWORD: ci_password_test
+
+jobs:
+  # ── Lint y formato ────────────────────────────────────────────────
+  lint:
+    name: Lint & Format (Ruff)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependencias de desarrollo
+        run: pip install -e ".[dev]"
+
+      - name: Ejecutar Ruff (linter)
+        run: ruff check services packages scripts tests
+
+      - name: Ejecutar Ruff (formatter check)
+        run: ruff format --check services packages scripts tests
+
+  # ── Tipado estático ───────────────────────────────────────────────
+  typecheck:
+    name: Tipado estático (mypy)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependencias de desarrollo
+        run: pip install -e ".[dev]"
+
+      - name: Ejecutar mypy
+        run: mypy services packages --config-file pyproject.toml
+
+  # ── Seguridad ─────────────────────────────────────────────────────
+  security:
+    name: Análisis de seguridad (Bandit)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar Bandit
+        run: pip install "bandit[toml]>=1.7"
+
+      - name: Ejecutar Bandit
+        run: bandit -c pyproject.toml -r services packages scripts
+
+  # ── Pruebas unitarias ─────────────────────────────────────────────
+  test-unit:
+    name: Pruebas unitarias
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -e ".[dev]"
+
+      - name: Ejecutar pruebas unitarias
+        run: pytest tests/unit/ -v --tb=short --cov=services --cov-report=xml
+
+      - name: Subir reporte de cobertura
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          flags: unit
+          fail_ci_if_error: false
+
+  # ── Pruebas de integración ────────────────────────────────────────
+  test-integration:
+    name: Pruebas de integración (PostgreSQL)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB:       ${{ env.POSTGRES_DB }}
+          POSTGRES_USER:     ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        options: >-
+          --health-cmd "pg_isready -U ${{ env.POSTGRES_USER }}"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -e ".[dev]"
+
+      - name: Aplicar esquema de BD de prueba
+        run: |
+          PGPASSWORD=${{ env.POSTGRES_PASSWORD }} psql \
+            -h localhost -U ${{ env.POSTGRES_USER }} \
+            -d ${{ env.POSTGRES_DB }} \
+            -f services/db/schema/init.sql || echo "Sin esquema inicial"
+
+      - name: Ejecutar pruebas de integración
+        env:
+          POSTGRES_HOST:     localhost
+          POSTGRES_PORT:     "5432"
+          POSTGRES_DB:       ${{ env.POSTGRES_DB }}
+          POSTGRES_USER:     ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+        run: pytest tests/integration/ -v --tb=short
+
+  # ── Build Docker ──────────────────────────────────────────────────
+  docker-build:
+    name: Build imagen Docker
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build imagen Odoo
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: false
+          tags: dls-comedor-industrial:ci-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ── Resumen de CI ─────────────────────────────────────────────────
+  ci-summary:
+    name: CI completado
+    runs-on: ubuntu-latest
+    permissions: {}
+    needs: [lint, typecheck, security, test-unit, test-integration, docker-build]
+    if: always()
+    steps:
+      - name: Verificar todos los jobs
+        run: |
+          if [[ "${{ contains(needs.*.result, 'failure') }}" == "true" ]]; then
+            echo "❌ Uno o más jobs fallaron."
+            exit 1
+          else
+            echo "✅ Todos los jobs de CI pasaron correctamente."
+          fi

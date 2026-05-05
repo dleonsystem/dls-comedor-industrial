@@ -1,0 +1,100 @@
+# docker-compose.yml — Entorno de desarrollo completo
+# dls-comedor-industrial
+# Uso: make up | docker compose up -d
+
+services:
+
+  # ── Base de datos PostgreSQL ─────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: comedor-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       ${POSTGRES_DB:-comedor_dev}
+      POSTGRES_USER:     ${POSTGRES_USER:-comedor_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+      PGDATA:            /var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      # Scripts de inicialización (se ejecutan una sola vez)
+      - ./services/db/schema:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-comedor_user} -d ${POSTGRES_DB:-comedor_dev}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - comedor-net
+
+  # ── Odoo 18 ──────────────────────────────────────────────────────
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ODOO_VERSION: "18.0"
+    container_name: comedor-odoo
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST:     db
+      PORT:     "5432"
+      USER:     ${POSTGRES_USER:-comedor_user}
+      PASSWORD: ${POSTGRES_PASSWORD:-change_me}
+    env_file:
+      - .env
+    volumes:
+      # Módulos personalizados (montado en vivo para desarrollo)
+      - ./services/odoo/addons:/mnt/extra-addons:ro
+      # Filestore persistente
+      - odoo-filestore:/var/lib/odoo
+      # Configuración
+      - ./services/odoo/config/odoo.conf:/etc/odoo/odoo.conf:ro
+    ports:
+      - "${ODOO_PORT:-8069}:8069"
+      - "${ODOO_LONGPOLLING_PORT:-8072}:8072"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8069/web/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    networks:
+      - comedor-net
+
+  # ── PgAdmin (sólo en desarrollo) ─────────────────────────────────
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: comedor-pgadmin
+    restart: unless-stopped
+    profiles:
+      - tools         # activar con: docker compose --profile tools up
+    environment:
+      PGADMIN_DEFAULT_EMAIL:    ${PGADMIN_DEFAULT_EMAIL:-admin@example.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-change_me}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    depends_on:
+      - db
+    networks:
+      - comedor-net
+
+# ── Redes ─────────────────────────────────────────────────────────
+networks:
+  comedor-net:
+    driver: bridge
+
+# ── Volúmenes persistentes ────────────────────────────────────────
+volumes:
+  db-data:
+    driver: local
+  odoo-filestore:
+    driver: local
+  pgadmin-data:
+    driver: local

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_comedor_menu_user,comedor.menu user,model_comedor_menu,base.group_user,1,0,0,0
+access_comedor_menu_manager,comedor.menu manager,model_comedor_menu,base.group_system,1,1,1,1
+access_comedor_racion_user,comedor.racion user,model_comedor_racion,base.group_user,1,0,1,0
+access_comedor_racion_manager,comedor.racion manager,model_comedor_racion,base.group_system,1,1,1,1

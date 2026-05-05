@@ -1,0 +1,60 @@
+# dependabot.yml — Actualizaciones automáticas de dependencias
+# Documentación: https://docs.github.com/es/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+
+updates:
+
+  # ── Dependencias Python (pip / pyproject.toml) ───────────────────
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: "America/Mexico_City"
+    open-pull-requests-limit: 5
+    reviewers:
+      - dleonsystem
+    labels:
+      - dependencies
+      - python
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      # Odoo tiene su propio ciclo de versiones — actualizar manualmente
+      - dependency-name: "odoo"
+
+  # ── GitHub Actions ────────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: "America/Mexico_City"
+    open-pull-requests-limit: 5
+    reviewers:
+      - dleonsystem
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "ci(deps)"
+
+  # ── Docker ────────────────────────────────────────────────────────
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: "America/Mexico_City"
+    open-pull-requests-limit: 3
+    reviewers:
+      - dleonsystem
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "chore(docker)"
