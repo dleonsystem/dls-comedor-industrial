@@ -10,6 +10,26 @@ assignees: ""
 
 <!-- Describe la funcionalidad que propones en 1-2 oraciones. -->
 
+## Trazabilidad
+
+- ID de iniciativa / épica: <!-- ej. EPIC-001 -->
+- Fase RUP: <!-- Inception | Elaboration | Construction | Transition -->
+- Semana / iteración: <!-- ej. Semana 1 / Iteración 01 -->
+- Responsable funcional: <!-- nombre o rol -->
+- Responsable técnico: <!-- nombre o rol -->
+
+## Alcance (MVP)
+
+### In (sí entra)
+
+- 
+- 
+
+### Out (no entra)
+
+- 
+- 
+
 ## Problema que resuelve
 
 <!--
@@ -43,6 +63,35 @@ assignees: ""
 
 - [ ] Dado que… cuando… entonces…
 - [ ] Dado que… cuando… entonces…
+
+## Matriz de ingeniería (obligatorio)
+
+### Hechos confirmados
+
+- 
+
+### Hallazgos
+
+- 
+
+### Supuestos
+
+- 
+
+### Riesgos
+
+- 
+
+### Recomendaciones
+
+- 
+
+## Evidencia esperada de cierre
+
+- [ ] PR vinculado a este issue
+- [ ] Evidencia de pruebas funcionales y/o técnicas
+- [ ] Documentación actualizada (si aplica)
+- [ ] Entrada en `CHANGELOG.md` (si aplica)
 
 ## Módulo / componente afectado
 

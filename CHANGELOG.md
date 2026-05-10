@@ -17,6 +17,9 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Configuración de Docker y docker-compose para entorno de desarrollo.
 - Hooks de pre-commit (ruff, mypy, bandit, detect-secrets).
 - Archivo `.env.example` con todas las variables requeridas.
+- Estandarización de trazabilidad en plantillas de issue y PR (matriz de ingeniería y cierre auditable).
+- Sección de trazabilidad de entregables en `CONTRIBUTING.md`.
+- Artefactos versionados de Semana 1 en `docs/project-control/` (alcance MVP, matriz de procesos y KPIs del piloto).
 
 ---
 

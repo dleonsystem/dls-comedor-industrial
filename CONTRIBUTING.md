@@ -16,6 +16,7 @@
 8. [Reportar un bug](#reportar-un-bug)
 9. [Proponer una nueva funcionalidad](#proponer-una-nueva-funcionalidad)
 10. [Entorno de desarrollo local](#entorno-de-desarrollo-local)
+11. [Trazabilidad de entregables](#trazabilidad-de-entregables)
 
 ---
 
@@ -169,3 +170,28 @@ make up
 make test
 make lint
 ```
+
+---
+
+## Trazabilidad de entregables
+
+Todo avance funcional, técnico u operativo debe dejar evidencia auditable.
+
+Cadena mínima obligatoria:
+
+1. **Issue**: abrir un issue usando plantilla (`feature_request` o `bug_report`) con alcance `In/Out`, criterios de aceptación y riesgos.
+2. **Rama**: crear rama con convención definida (`feature/`, `fix/`, `docs/`, etc.) y asociarla al issue.
+3. **Commits atómicos**: un cambio lógico por commit, usando Conventional Commits y referencia al issue cuando aplique.
+4. **PR**: abrir PR con plantilla completa, incluyendo evidencia de pruebas y matriz de ingeniería.
+5. **Revisión**: aprobación requerida y CI en verde antes de merge.
+6. **Registro**: actualizar `CHANGELOG.md` y documentación relacionada cuando aplique.
+
+Para control de proyecto, cada entregable debe distinguir explícitamente:
+
+- **Hechos confirmados**
+- **Hallazgos**
+- **Supuestos**
+- **Riesgos**
+- **Recomendaciones**
+
+Si un cambio no deja esta cadena completa, no se considera cerrado desde la perspectiva de ingeniería y trazabilidad.

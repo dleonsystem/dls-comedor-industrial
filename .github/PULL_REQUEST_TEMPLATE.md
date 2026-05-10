@@ -4,6 +4,13 @@
 
 Closes #<!-- número del issue -->
 
+## Trazabilidad
+
+- Issue relacionado: #<!-- número -->
+- Fase RUP: <!-- Inception | Elaboration | Construction | Transition -->
+- Semana / iteración: <!-- ej. Semana 1 / Iteración 01 -->
+- Alcance afectado (In/Out): <!-- breve resumen -->
+
 ## Tipo de cambio
 
 - [ ] 🐛 `fix` — Corrección de bug
@@ -27,6 +34,28 @@ Closes #<!-- número del issue -->
 -->
 
 - 
+- 
+
+## Matriz de ingeniería
+
+### Hechos confirmados
+
+- 
+
+### Hallazgos
+
+- 
+
+### Supuestos
+
+- 
+
+### Riesgos
+
+- 
+
+### Recomendaciones
+
 - 
 
 ## Pruebas realizadas
@@ -73,3 +102,9 @@ Resultado: ...
 ## Notas para el revisor
 
 <!-- Cualquier contexto adicional que el revisor deba conocer. -->
+
+## Criterio de cierre
+
+- [ ] El alcance comprometido en el issue quedó cubierto
+- [ ] La evidencia presentada permite auditoría y trazabilidad
+- [ ] Se documentaron riesgos residuales y acciones pendientes
