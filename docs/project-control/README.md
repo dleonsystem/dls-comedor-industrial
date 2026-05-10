@@ -33,6 +33,15 @@ Mantener trazabilidad completa entre:
 - `W2-DATOS-ARRANQUE.md`
 - `W2-QA-UAT.md`
 
+## Trazabilidad de integracion
+
+Referencia de integracion por iteracion:
+
+- Semana 1: PR `#7`.
+- Semana 2: PRs `#8`, `#9`, `#10`.
+
+Nota: este indice lista artefactos de trabajo; el estado actual de merge se consulta en GitHub PRs.
+
 ## Estructura minima por artefacto
 
 Cada documento debe incluir, como minimo:
