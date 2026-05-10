@@ -19,6 +19,20 @@ Mantener trazabilidad completa entre:
   - `W1-MATRIZ-PROCESOS.md`
   - `W1-KPIS-PILOTO.md`
 
+## Artefactos disponibles
+
+### Semana 1
+
+- `W1-MVP-ALCANCE.md`
+- `W1-MATRIZ-PROCESOS.md`
+- `W1-KPIS-PILOTO.md`
+
+### Semana 2
+
+- `W2-CONFIG-BASE.md`
+- `W2-DATOS-ARRANQUE.md`
+- `W2-QA-UAT.md`
+
 ## Estructura minima por artefacto
 
 Cada documento debe incluir, como minimo:
