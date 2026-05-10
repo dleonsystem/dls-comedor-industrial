@@ -22,7 +22,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Artefactos versionados de Semana 1 en `docs/project-control/` (alcance MVP, matriz de procesos y KPIs del piloto).
 
 ### Changed
-- Se actualiza `docs/project-control/README.md` con estado real de avance: Semana 1 en `main` y Semana 2 en seguimiento por PRs `#8`, `#9` y `#10`.
+- Se actualiza `docs/project-control/README.md` con trazabilidad de integración por iteración (Semana 1: PR `#7`; Semana 2: PRs `#8`, `#9`, `#10`), ya consolidadas en `main`.
 
 ---
 
