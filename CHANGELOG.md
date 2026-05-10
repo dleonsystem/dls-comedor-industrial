@@ -21,6 +21,9 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Sección de trazabilidad de entregables en `CONTRIBUTING.md`.
 - Artefactos versionados de Semana 1 en `docs/project-control/` (alcance MVP, matriz de procesos y KPIs del piloto).
 
+### Changed
+- Se actualiza `docs/project-control/README.md` con estado real de avance: Semana 1 en `main` y Semana 2 en seguimiento por PRs `#8`, `#9` y `#10`.
+
 ---
 
 ## [0.1.0] — 2026-05-05
