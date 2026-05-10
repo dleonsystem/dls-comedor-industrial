@@ -19,32 +19,28 @@ Mantener trazabilidad completa entre:
   - `W1-MATRIZ-PROCESOS.md`
   - `W1-KPIS-PILOTO.md`
 
-## Estado de avance (repositorio)
+## Artefactos disponibles
 
-Ultima validacion: 2026-05-10
-
-### Semana 1 (en `main`)
+### Semana 1
 
 - `W1-MVP-ALCANCE.md`
 - `W1-MATRIZ-PROCESOS.md`
 - `W1-KPIS-PILOTO.md`
 
-Evidencia de integracion:
+### Semana 2
 
-- PR mergeado: `#7`.
+- `W2-CONFIG-BASE.md`
+- `W2-DATOS-ARRANQUE.md`
+- `W2-QA-UAT.md`
 
-### Semana 2 (en seguimiento por PR)
+## Trazabilidad de integracion
 
-Estos entregables ya fueron preparados y estan en revision (aun no mergeados a `main`):
+Referencia de integracion por iteracion:
 
-- PR `#8`: Configuracion base
-  - https://github.com/dleonsystem/dls-comedor-industrial/pull/8
-- PR `#9`: Datos de arranque
-  - https://github.com/dleonsystem/dls-comedor-industrial/pull/9
-- PR `#10`: QA/UAT
-  - https://github.com/dleonsystem/dls-comedor-industrial/pull/10
+- Semana 1: PR `#7`.
+- Semana 2: PRs `#8`, `#9`, `#10`.
 
-Estado de merge reportado: `CLEAN` en los tres PRs.
+Nota: este indice lista artefactos de trabajo; el estado actual de merge se consulta en GitHub PRs.
 
 ## Estructura minima por artefacto
 
