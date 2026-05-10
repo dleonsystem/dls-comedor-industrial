@@ -20,6 +20,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Estandarización de trazabilidad en plantillas de issue y PR (matriz de ingeniería y cierre auditable).
 - Sección de trazabilidad de entregables en `CONTRIBUTING.md`.
 - Artefactos versionados de Semana 1 en `docs/project-control/` (alcance MVP, matriz de procesos y KPIs del piloto).
+- Inicio de artefactos de Semana 3 en `docs/project-control/` para refinamiento funcional y tecnico.
 
 ### Changed
 - Se actualiza `docs/project-control/README.md` con trazabilidad de integración por iteración (Semana 1: PR `#7`; Semana 2: PRs `#8`, `#9`, `#10`), ya consolidadas en `main`.

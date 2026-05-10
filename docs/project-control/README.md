@@ -33,6 +33,12 @@ Mantener trazabilidad completa entre:
 - `W2-DATOS-ARRANQUE.md`
 - `W2-QA-UAT.md`
 
+### Semana 3
+
+- `W3-CASOS-USO.md`
+- `W3-REGLAS-NEGOCIO.md`
+- `W3-BASELINE-TECNICA.md`
+
 ## Trazabilidad de integracion
 
 Referencia de integracion por iteracion:
