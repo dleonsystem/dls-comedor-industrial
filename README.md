@@ -39,6 +39,7 @@
 
 Consulta [`docs/architecture.md`](docs/architecture.md) para el diagrama completo.  
 Las decisiones de diseño están documentadas como ADRs en [`docs/decisions/`](docs/decisions/).
+La trazabilidad de avance y alcance del proyecto se documenta en [`docs/project-control/`](docs/project-control/).
 
 ---
 
